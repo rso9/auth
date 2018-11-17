@@ -1,7 +1,7 @@
 import authService from '../services/auth'
 import User from '../models/User'
 import db from '../db'
-import bcrypt from 'bcrypt'
+import bcrypt from 'bcryptjs'
 
 const login = async (req, res) => {
   const email = req.body.email;

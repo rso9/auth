@@ -4,8 +4,8 @@
   "description": "Microservice for registering and authenticating users",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon -w . --exec \"babel-node . --presets es2015,stage-0\"",
-    "build": "babel . -s -D -d dist --presets es2015,stage-0",
+    "dev": "nodemon -w ./src --exec \"babel-node ./src --presets es2015,stage-0\"",
+    "build": "babel ./src -s -D -d ./dist --presets es2015,stage-0",
     "start": "node dist",
     "prestart": "npm run -s build",
     "test": "jest"
@@ -20,7 +20,7 @@
   },
   "license": "ISC",
   "dependencies": {
-    "bcrypt": "^3.0.2",
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
     "cors": "^2.8.5",
     "express": "^4.16.4",

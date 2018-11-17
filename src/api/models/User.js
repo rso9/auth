@@ -1,6 +1,6 @@
 import Sequelize from 'sequelize'
 import db from '../db'
-import bcrypt from 'bcrypt'
+import bcrypt from 'bcryptjs'
 
 const userTable = 'users'
 
