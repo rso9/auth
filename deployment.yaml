@@ -1,0 +1,19 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: auth
+spec:
+  replicas: 7
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        name: auth
+    spec:
+      containers:
+        - name: auth
+          image: gcr.io/pragmatic-zoo-222814/auth:0.1
+          imagePullPolicy: IfNotPresent
+          ports:
+          - containerPort: 3000
