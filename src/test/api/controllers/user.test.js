@@ -1,3 +1,7 @@
-test('adds 1 + 2 to equal 3', () => {
-  expect(1+2).toBe(3);
-});
+import UserController from '../../../api/controllers/user'
+
+test('index lists users', () => {
+  UserController.index().then((list) => {  
+    expect(list).toReturnWith({id: 1})
+  }).catch(() => {})
+})

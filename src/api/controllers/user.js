@@ -59,7 +59,19 @@ const register = async (req, res) => {
   }
 };
 
+const index = async (req, res) => {
+  const users = await User.findAll()
+  if (users) {
+    res.json(users)
+    res.end()
+    return users
+  } else {
+    return false
+  }
+}
+
 export default {
   login,
-  register
+  register,
+  index
 }
