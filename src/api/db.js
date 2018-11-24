@@ -1,12 +1,13 @@
 import Sequelize from 'sequelize'
-import path from 'path'
+var pg = require('pg')
+pg.defaults.ssl = true
 
 const config = {
-  database: 'db',
-  username: 'root',
-  password: '',
-  host: 'localhost',
-  dialect: 'sqlite' || 'mysql' || 'postgres',
+  database: 'dccnfm02n84jga',
+  username: 'dsjvoasgdslwqd',
+  password: process.env.POSTGRES_PASSWORD,
+  host: 'ec2-54-75-231-3.eu-west-1.compute.amazonaws.com',
+  dialect: 'postgres',
 };
 
 export default new Sequelize(
@@ -14,13 +15,12 @@ export default new Sequelize(
   config.username,
   config.password, {
     host: config.host,
-    dialect: 'sqlite',
+    dialect: config.dialect,
     pool: {
       max: 5,
       min: 0,
       idle: 10000,
     },
     operatorsAliases: false,
-    storage: 'database.sqlite',
   },
 );

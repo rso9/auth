@@ -61,6 +61,7 @@ const register = async (req, res) => {
 
 const index = async (req, res) => {
   const users = await User.findAll()
+
   if (users) {
     res.json(users)
     res.end()
