@@ -12,7 +12,7 @@ env:
 
 before_install:
   - docker pull node:10-alpine
-  - docker build -t rso9/auth .
+  - docker build -t "$DOCKER_IMAGE" .
   - docker run -d -p 127.0.0.1:80:3000 rso9/auth
   - docker ps -a
 
