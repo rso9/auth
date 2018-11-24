@@ -19,8 +19,6 @@ before_install:
 script:
   - npm test
 
-deploy:
-  provider: script
-  script: bash .travis/docker_push.sh
-  on:
-    branch: master
+after_success:
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - docker push "$DOCKER_IMAGE"

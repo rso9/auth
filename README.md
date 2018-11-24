@@ -1,4 +1,4 @@
-# Authentication
+# Authentication [![Build Status](https://travis-ci.org/rso9/auth.svg?branch=master)](https://travis-ci.org/rso9/auth)
 
 This is the authentication microservice which provides functionality for registering and authenticating users from any other microservice.
 
