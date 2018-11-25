@@ -24,6 +24,12 @@ spec:
             initialDelaySeconds: 3
             periodSeconds: 3
             failureThreshold: 2
+          env:
+          - name: POSTGRES_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: postgres
+                key: password
 ---
 
 apiVersion: v1
