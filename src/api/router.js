@@ -8,5 +8,6 @@ router.post('/login', userController.login)
 router.post('/register', userController.register)
 router.get('/users', userController.index)
 router.get('/health', healthController.health)
+router.get('/lookup', healthController.lookup)
 
 export default router
