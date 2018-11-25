@@ -1,7 +1,7 @@
 const KumuluzeeDiscovery = require('@kumuluz/kumuluzee-discovery').default
 
 const health = (req, res) => {
-  res.status(200).send('Auth service up and running.')
+  res.json({status: 'UP'})
   res.end()
 }
 
