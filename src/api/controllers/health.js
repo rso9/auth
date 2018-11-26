@@ -75,6 +75,7 @@ const lookup = async (req, res) => {
       environment: "dev",
       accessType: "DIRECT"
     })
+    console.log("found self at: " + response)
     res.json({service: response})
   } catch (err) {
     res.status(500).send(err)

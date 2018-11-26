@@ -9,9 +9,9 @@ const requestCatalog = async (req, res) => {
       environment: "dev",
       accessType: "DIRECT"
     })
-    console.log('found catalog at:', internalURL)
+    console.log(`found catalog at ${internalURL}`)
     console.log('----')
-    request(internalURL + 'v1/artist', (err, response, body) => {
+    request(`${internalURL}v1/artist`, (err, response, body) => {
       console.log('catalog returns:')
       console.log(body)
       console.log('----')
