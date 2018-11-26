@@ -33,7 +33,7 @@ const checkDiskspaceHealth = () => {
       
       resolve({
         name: "DiskSpaceHealthCheck",
-        state: (result.free > 0.01 * result.total) ? "UP" : "DOWN"
+        state: (result.free > 0.000001 * result.total) ? "UP" : "DOWN"
       })
     })
   })
