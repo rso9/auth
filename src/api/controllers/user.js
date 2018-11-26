@@ -45,7 +45,6 @@ const register = async (req, res) => {
   }
 
   try {
-    await db.sync({force: true})
     const user = await User.create({
       email: body.email,
       password: body.password,
@@ -60,14 +59,14 @@ const register = async (req, res) => {
 };
 
 const index = async (req, res) => {
-  const users = await User.findAll()
-
-  if (users) {
-    res.json(users)
-    res.end()
-    return users
-  } else {
-    return false
+  try {
+    const users = await User.findAll()
+    if (users) {
+      res.json(users)
+      res.end()
+    }
+  } catch (err) {
+    res.status(500).send(err)
   }
 }
 
