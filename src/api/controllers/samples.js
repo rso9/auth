@@ -15,7 +15,11 @@ const requestCatalog = async (req, res) => {
       console.log('catalog returns:')
       console.log(body)
       console.log('----')
-      res.json(body)
+      if (err) {
+        res.json(err)
+      } else {
+        res.json(body)
+      }
       res.end()
     })
     
