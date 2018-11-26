@@ -17,7 +17,7 @@ export default new Sequelize(
     host: config.host,
     dialect: config.dialect,
     pool: {
-      max: 5,
+      max: 2,
       min: 0,
       idle: 10000,
     },
