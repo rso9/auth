@@ -11,12 +11,12 @@ const requestCatalog = async (req, res) => {
     })
     console.log(`found catalog at ${internalURL}`)
     console.log('----')
-    request(`${internalURL}v1/artist`, (err, response, body) => {
-      console.log('catalog returns:')
-      console.log(body)
-      console.log('----')
-      if (err) {
-        res.json(err)
+    request(`${internalURL}v1/artist`, {timeout: 10000}, (err, response, body) => {
+      if (err.code === 'ETIMEDOUT') {
+        res.status(400).send('Connection timed out')
+      }
+      else if (err) {
+        res.send(err)
       } else {
         res.json(body)
       }
