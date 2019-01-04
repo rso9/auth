@@ -1,6 +1,7 @@
 import diskspace from 'diskspace'
 import db from '../db'
 import User from '../models/User'
+const w = require('winston')
 const KumuluzeeDiscovery = require('@kumuluz/kumuluzee-discovery').default
 
 const checkDBHealth = () => {
@@ -40,7 +41,7 @@ const checkDiskspaceHealth = () => {
 }
 
 const health = async (req, res) => {
-  w.log('info', 'ENTRY HEALTH ENDPOINT');
+  w.log('info', 'HEALTH ENDPOINT', {markerName: 'ENTRY'});
   let health = {
     state: 'DOWN',
     checks: []
@@ -64,13 +65,14 @@ const health = async (req, res) => {
   let allGood = health.checks.every((e) => e.state === 'UP')
   
   if (allGood) health.state = 'UP'
+  else w.log('error', 'HEALTH ENDPOINT', { markerName: 'NOT ALL CHECKS WERE UP', healthChecks: health.checks });
 
-  w.log('info', 'EXIT HEALTH ENDPOINT');
+  w.log('info', 'HEALTH ENDPOINT', {markerName: 'EXIT'});
   res.status(allGood ? 200 : 500).json(health)
 }
 
 const lookup = async (req, res) => {
-  w.log('info', 'ENTRY LOOKUP ENDPOINT');
+  w.log('info', 'LOOKUP ENDPOINT', {markerName: 'ENTRY'});
   try {
     const response = await KumuluzeeDiscovery.discoverService({
       value: "auth",
@@ -79,10 +81,10 @@ const lookup = async (req, res) => {
       accessType: "DIRECT"
     })
     console.log("found self at: " + response)
-    w.log('info', 'EXIT LOOKUP ENDPOINT');
+    w.log('info', 'LOOKUP ENDPOINT', {markerName: 'EXIT', selfLocation: response});
     res.json({service: response})
   } catch (err) {
-    w.log('error', 'EXIT LOOKUP ENDPOINT');
+    w.log('error', 'LOOKUP ENDPOINT', {markerName: 'EXIT', error: err});
     res.status(500).send(err)
   }
 }

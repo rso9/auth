@@ -1,7 +1,9 @@
 import request from 'request'
+const w = require('winston')
 const KumuluzeeDiscovery = require('@kumuluz/kumuluzee-discovery').default
 
 const requestCatalog = async (req, res) => {
+  w.log('info', 'REQUEST CATALOG ENDPOINT', {markerName: 'ENTRY'});
   try {
     const internalURL = await KumuluzeeDiscovery.discoverService({
       value: "catalog",
@@ -15,23 +17,29 @@ const requestCatalog = async (req, res) => {
       
       if (err) {
         if (err.code === 'ETIMEDOUT') {
-          res.status(400).send('Connection timed out')
+          const errMsg = 'Connection timed out'
+          w.log('error', 'REQUEST CATALOG ENDPOINT', {markerName: 'EXIT', error: errMsg});
+          res.status(400).json({error: errMsg})
         } else {
-          res.send(err)
+          const errMsg = 'Couldn\'t find catalog'
+          w.log('error', 'REQUEST CATALOG ENDPOINT', {markerName: 'EXIT', error: errMsg});
+          res.status(500).json({error: errMsg})
         }
       } else {
+        w.log('info', 'REQUEST CATALOG ENDPOINT', {markerName: 'EXIT', catalogFoundAt: body});
         res.json(body)
       }
       res.end()
     })
     
   } catch (err) {
-    res.status(500).send({err, msg: 'Couldn\'t find catalog'})
+    w.log('error', 'REQUEST CATALOG ENDPOINT', {markerName: 'EXIT', error: 'Couldn\'t find catalog'});
+    res.status(500).json({err: 'Couldn\'t find catalog'})
   }
 }
 
 const projectInfo = async (req, res) => {
-  w.log('info', 'ENTER PROJECT INFO ENDPOINT');
+  w.log('info', 'PROJECT INFO ENDPOINT', {markerName: 'ENTRY'});
   const thisurl = "http://35.204.191.75/users"
   const catalogurl = "http://35.204.242.217/v1/artist"
   res.json({
@@ -42,7 +50,7 @@ const projectInfo = async (req, res) => {
     "travis": ["https://travis-ci.org/rso9/auth", "https://travis-ci.org/rso9/catalog-management"],
     "dockerhub": ["https://hub.docker.com/r/rso9/auth/", "https://hub.docker.com/r/rso9/catalog-management/"]
   })
-  w.log('info', 'EXIT LOOKUP ENDPOINT');
+  w.log('info', 'PROJECT INFO ENDPOINT', {markerName: 'EXIT'});
   res.end()
 }
 
