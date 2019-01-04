@@ -1,12 +1,12 @@
 {
   "name": "auth",
-  "version": "0.0.1",
+  "version": "0.7.3",
   "description": "Microservice for registering and authenticating users",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon -w ./src --exec \"babel-node ./src --presets es2015,stage-0\"",
+    "dev": "NODE_ENV=development nodemon -w ./src --exec \"babel-node ./src --presets es2015,stage-0\"",
     "build": "babel ./src -s -D -d ./dist --presets es2015,stage-0",
-    "start": "node dist",
+    "start": "NODE_ENV=production node dist",
     "prestart": "npm run -s build",
     "test": "jest"
   },
@@ -20,7 +20,7 @@
   },
   "license": "ISC",
   "dependencies": {
-    "@kumuluz/kumuluzee-discovery": "^1.0.0",
+    "@kumuluz/kumuluzee-discovery": "^1.1.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
     "cors": "^2.8.5",
@@ -29,7 +29,10 @@
     "jsonwebtoken": "^8.3.0",
     "pg": "^7.6.1",
     "sequelize": "^4.41.2",
-    "sqlite3": "^4.0.4"
+    "sqlite3": "^4.0.4",
+    "winston": "^2.4.4",
+    "winston-logstash": "^0.4.0",
+    "winston-logstash-transport": "^2.0.0"
   },
   "devDependencies": {
     "babel-cli": "^6.9.0",

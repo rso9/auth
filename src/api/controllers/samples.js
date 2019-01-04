@@ -31,6 +31,7 @@ const requestCatalog = async (req, res) => {
 }
 
 const projectInfo = async (req, res) => {
+  w.log('info', 'ENTER PROJECT INFO ENDPOINT');
   const thisurl = "http://35.204.191.75/users"
   const catalogurl = "http://35.204.242.217/v1/artist"
   res.json({
@@ -40,7 +41,8 @@ const projectInfo = async (req, res) => {
     "github": ["https://github.com/rso9/auth", "https://github.com/rso9/catalog-management"],
     "travis": ["https://travis-ci.org/rso9/auth", "https://travis-ci.org/rso9/catalog-management"],
     "dockerhub": ["https://hub.docker.com/r/rso9/auth/", "https://hub.docker.com/r/rso9/catalog-management/"]
-})
+  })
+  w.log('info', 'EXIT LOOKUP ENDPOINT');
   res.end()
 }
 

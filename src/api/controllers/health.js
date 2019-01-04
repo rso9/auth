@@ -40,6 +40,7 @@ const checkDiskspaceHealth = () => {
 }
 
 const health = async (req, res) => {
+  w.log('info', 'ENTRY HEALTH ENDPOINT');
   let health = {
     state: 'DOWN',
     checks: []
@@ -64,10 +65,12 @@ const health = async (req, res) => {
   
   if (allGood) health.state = 'UP'
 
+  w.log('info', 'EXIT HEALTH ENDPOINT');
   res.status(allGood ? 200 : 500).json(health)
 }
 
 const lookup = async (req, res) => {
+  w.log('info', 'ENTRY LOOKUP ENDPOINT');
   try {
     const response = await KumuluzeeDiscovery.discoverService({
       value: "auth",
@@ -76,8 +79,10 @@ const lookup = async (req, res) => {
       accessType: "DIRECT"
     })
     console.log("found self at: " + response)
+    w.log('info', 'EXIT LOOKUP ENDPOINT');
     res.json({service: response})
   } catch (err) {
+    w.log('error', 'EXIT LOOKUP ENDPOINT');
     res.status(500).send(err)
   }
 }
