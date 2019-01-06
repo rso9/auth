@@ -17,13 +17,13 @@ const winston = require('winston')
 require('winston-logstash')
 
 winston.add(winston.transports.Logstash, {
-    port: 13302,
+    port: 13005,
     node_name: 'Auth microservice',
     meta: {
         version: pjson.version || process.env.VERSION || '0.7.4',
         environment: process.env.NODE_ENV ? process.env.NODE_ENV : 'development'
     },
-    host: '50640222-d785-48fb-afbb-62a948d61574-ls.logit.io'
+    host: 'ea6e1fcd-4e85-48c9-8a3e-db8a351fe3b4-ls.logit.io'
 })
 
 let util = null
