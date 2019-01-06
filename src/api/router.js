@@ -6,6 +6,9 @@ import samplesController from './controllers/samples'
 const router = express.Router()
 
 router.post('/login', userController.login)
+router.get('/dummy', (req, res) => {
+  res.status(200).end()
+})
 router.post('/register', userController.register)
 router.get('/users', userController.index)
 router.get('/health', healthController.health)

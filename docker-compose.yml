@@ -2,12 +2,12 @@
 version: "3"
 services:
   auth:
-    image: rso9/auth:0.7.3
+    image: rso9/auth:0.7.4
     # build: .
     ports:
       - 80:3000
     environment:
-      VERSION: 0.7.3
+      VERSION: 0.7.4
       KUMULUZEE_CONFIG_ETCD_HOSTS: http://etcd:2379
       KUMULUZEE_DISCOVERY_ETCD_HOSTS: http://etcd:2379
     depends_on:

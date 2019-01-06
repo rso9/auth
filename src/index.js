@@ -20,7 +20,7 @@ winston.add(winston.transports.Logstash, {
     port: 13302,
     node_name: 'Auth microservice',
     meta: {
-        version: pjson.version || process.env.VERSION || '0.7.3',
+        version: pjson.version || process.env.VERSION || '0.7.4',
         environment: process.env.NODE_ENV ? process.env.NODE_ENV : 'development'
     },
     host: '50640222-d785-48fb-afbb-62a948d61574-ls.logit.io'
